@@ -1,4 +1,5 @@
 import numpy as np
+import os
 
 def process_output(output):
     if type(output) is int:
@@ -47,26 +48,28 @@ def print_start():
     print("\n\n")
 
 def print_matrix(matrix:np.ndarray, step:int=-1):
+    os.system('cls' if os.name == 'nt' else 'clear')
+    _str = ""
     if step >= 0:
-        print("  STEP: ",step)
+        _str = "  STEP: "+str(step)+"\n"
     
     x, y = matrix.shape
-    print(f"+{"==="*y}+")
+    _str += f"+{"==="*y}+\n"
     for i in range(x):
         for line in range(2):
 
-            print("|", end="")
+            _str += "|"
 
             for i2 in range(y):
                 if matrix[i, i2] == 1:
-                    print("###", end="")
+                    _str += "###"
                 else:
                     if line == 0:
-                        print(" . ", end="")
+                        _str += " . "
                     else:
-                        print("   ", end="")
+                        _str += "   "
 
-            print("|")
+            _str += "|\n"
 
-    print(f"+{"==="*y}+", end="")
-    print("\n\n")
+    _str += f"+{"==="*y}+\n\n"
+    print(_str)

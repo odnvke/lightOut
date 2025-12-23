@@ -9,9 +9,10 @@ from calc import calc
 from console import process_output, print_start, print_matrix
 
 matrix:np.ndarray = np.zeros((size_x, size_y))
-matrix[1, 1] = 1
-matrix[2, 2] = 1
-matrix[2, 4] = 1
+matrix[0, 0] = 1
+matrix[0, 19] = 1
+matrix[19, 0] = 1
+matrix[19, 19] = 1
 
 step:int = 0
 
@@ -20,7 +21,7 @@ RUN = True
 print_start()
 print_matrix(matrix, step)
 while RUN:
-    print("\n\n\n\n\n")
+    #print("\n\n\n\n\n")
     output = calc(matrix)
     RUN = process_output(output)
     if not RUN:
@@ -30,4 +31,4 @@ while RUN:
     print_matrix(matrix, step)
 
     step += 1
-    time.sleep(0.0001)
+    time.sleep(0.05)

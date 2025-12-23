@@ -54,23 +54,27 @@ def process_matrix_with_rule(matrix:np.ndarray, x:int, y:int, mode=0, chenge_sel
 def calc(matrix: np.ndarray) -> (np.ndarray, int):
     global matrix2, pmatrix
 
-    if mode == 0:
-        if np.all(matrix2 == 0):
-            # если цель и текущая матраца пустая возврощяем 0 
-            if not np.any(matrix):
-                return 0
+    while True:
+        if mode == 0:
+            if np.all(matrix2 == 0):
+                # если цель и текущая матраца пустая возврощяем 0 
+                if not np.any(matrix):
+                    return 0
 
-            matrix2 = matrix.copy()
+                matrix2 = matrix.copy()
+                x, y = np.where(matrix2==1)
+                break
 
-        x, y = np.where(matrix2==1)
-        x, y = x[0], y[0]
-        matrix2[x, y] = 0
+            x, y = np.where(matrix2==1)
+            x, y = x[0], y[0]
+            matrix2[x, y] = 0
 
-        matrix = process_matrix_with_rule(matrix, x, y, sosedstvo, chenge_self)
+            matrix = process_matrix_with_rule(matrix, x, y, sosedstvo, chenge_self)
 
 
-    if np.array_equal(matrix, pmatrix):
-        return 1
+        if np.array_equal(matrix, pmatrix):
+            return 1
 
-    pmatrix = matrix.copy
+        pmatrix = matrix.copy
+    
     return matrix
